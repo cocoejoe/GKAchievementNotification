@@ -3,10 +3,12 @@
 //
 //  Created by Benjamin Borowski on 9/30/10.
 //  Copyright 2010 Typeoneerror Studios. All rights reserved.
-//  $Id$
+//  Modified Nov 12 2012
+//  Author: Martin Walsh
+//
 //
 
-#import <GameKit/GameKit.h>
+#import "cocos2d.h"
 #import "GKAchievementHandler.h"
 #import "GKAchievementNotification.h"
 
@@ -60,26 +62,19 @@ static GKAchievementHandler *defaultHandler = nil;
     self = [super init];
     if (self != nil)
     {
-        _topView = [[UIApplication sharedApplication] keyWindow];
+        _topView = [[CCDirector sharedDirector] view];
         _queue = [[NSMutableArray alloc] initWithCapacity:0];
         self.image = [UIImage imageNamed:@"gk-icon.png"];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [_queue release];
-    [_image release];
-    [super dealloc];
-}
-
 #pragma mark -
 
 - (void)notifyAchievement:(GKAchievementDescription *)achievement
 {
-    GKAchievementNotification *notification = [[[GKAchievementNotification alloc] initWithAchievementDescription:achievement] autorelease];
-    notification.frame = kGKAchievementFrameStart;
+    GKAchievementNotification *notification = [[GKAchievementNotification alloc] initWithAchievementDescription:achievement] ;
+    notification.frame  = CGRectOffset(kGKAchievementFrameStart, ([[UIScreen mainScreen] bounds].size.height*0.5f)-(kGKAchievementFrameStart.size.width*0.5f), 0);
     notification.handlerDelegate = self;
 
     [_queue addObject:notification];
@@ -91,8 +86,9 @@ static GKAchievementHandler *defaultHandler = nil;
 
 - (void)notifyAchievementTitle:(NSString *)title andMessage:(NSString *)message
 {
-    GKAchievementNotification *notification = [[[GKAchievementNotification alloc] initWithTitle:title andMessage:message] autorelease];
-    notification.frame = kGKAchievementFrameStart;
+    GKAchievementNotification *notification = [[GKAchievementNotification alloc] initWithTitle:title andMessage:message] ;
+    notification.frame  = CGRectOffset(kGKAchievementFrameStart, ([[UIScreen mainScreen] bounds].size.height*0.5f)-(kGKAchievementFrameStart.size.width*0.5f), 0);
+
     notification.handlerDelegate = self;
 
     [_queue addObject:notification];

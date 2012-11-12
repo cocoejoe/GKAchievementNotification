@@ -3,9 +3,12 @@
 //
 //  Created by Benjamin Borowski on 9/30/10.
 //  Copyright 2010 Typeoneerror Studios. All rights reserved.
-//  $Id$
+//  Modified Nov 12 2012
+//  Author: Martin Walsh
+//
 //
 
+#import "cocos2d.h"
 #import <GameKit/GameKit.h>
 #import "GKAchievementNotification.h"
 
@@ -80,6 +83,7 @@
     self.message = message;
     if ((self = [self initWithFrame:frame]))
     {
+        
     }
     return self;
 }
@@ -95,7 +99,6 @@
         tBackground.image = backgroundStretch;
         self.background = tBackground;
         self.opaque = NO;
-        [tBackground release];
         [self addSubview:self.background];
 
         CGRect r1 = kGKAchievementText1;
@@ -109,7 +112,7 @@
         tTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f];
         tTextLabel.text = NSLocalizedString(@"Achievement Unlocked", @"Achievemnt Unlocked Message");
         self.textLabel = tTextLabel;
-        [tTextLabel release];
+
 
         // detail label
         UILabel *tDetailLabel = [[UILabel alloc] initWithFrame:r2];
@@ -120,7 +123,7 @@
         tDetailLabel.textColor = [UIColor whiteColor];
         tDetailLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0f];
         self.detailLabel = tDetailLabel;
-        [tDetailLabel release];
+
 
         if (self.achievement)
         {
@@ -151,16 +154,6 @@
     
     self.handlerDelegate = nil;
     self.logo = nil;
-    
-    [_achievement release];
-    [_background release];
-    [_detailLabel release];
-    [_logo release];
-    [_message release];
-    [_textLabel release];
-    [_title release];
-    
-    [super dealloc];
 }
 
 
@@ -174,7 +167,8 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDidStopSelector:@selector(animationInDidStop:finished:context:)];
-    self.frame = kGKAchievementFrameEnd;
+    self.frame  = CGRectOffset(kGKAchievementFrameEnd, ([[UIScreen mainScreen] bounds].size.height*0.5f)-(kGKAchievementFrameEnd.size.width*0.5f), 0);
+    
     [UIView commitAnimations];
 }
 
@@ -186,7 +180,8 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationBeginsFromCurrentState:YES];
     [UIView setAnimationDidStopSelector:@selector(animationOutDidStop:finished:context:)];
-    self.frame = kGKAchievementFrameStart;
+    self.frame  = CGRectOffset(kGKAchievementFrameStart, ([[UIScreen mainScreen] bounds].size.height*0.5f)-(kGKAchievementFrameStart.size.width*0.5f), 0);
+
     [UIView commitAnimations];
 }
 
@@ -199,7 +194,6 @@
             UIImageView *tLogo = [[UIImageView alloc] initWithFrame:CGRectMake(7.0f, 6.0f, 34.0f, 34.0f)];
             tLogo.contentMode = UIViewContentModeCenter;
             self.logo = tLogo;
-            [tLogo release];
             [self addSubview:self.logo];
         }
         self.logo.image = image;

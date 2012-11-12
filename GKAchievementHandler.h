@@ -3,10 +3,11 @@
 //
 //  Created by Benjamin Borowski on 9/30/10.
 //  Copyright 2010 Typeoneerror Studios. All rights reserved.
-//  $Id$
+//
+//  Modified Nov 12 2012
+//  Author: Martin Walsh
 //
 
-#import <Foundation/Foundation.h>
 #import "GKAchievementNotification.h"
 
 /**
