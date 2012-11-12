@@ -5,7 +5,7 @@ Changelog
 -----------
 Nov 12th 2012
 Quick modfication for cocos2d 2.0+
- - Uses Director View 
+Uses Director View 
 ARC Enabled
 Horizontal Centre Align
 
@@ -13,6 +13,8 @@ Notes
 -----------
 Needs corrected for iPad
 Not really tested it ;-)
+Add GAKit Framework
+
 
 What is it?
 -----------
